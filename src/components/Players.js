@@ -1,36 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import getPlayers from '../services/PlayerService';
 
 export default function Players() {
 	const [ players, setPlayers ] = useState([]);
 
-	/*  const getAllPlayers = () => {
-    PlayerService.getPlayers()
-    .then((res) => {
-      setPlayers(res);
-    })
-  } */
-
 	useEffect(() => {
-		getPlayers.then(res => res.json())
-      	.then(result => {
-        setPlayers(result);
-      }) 
-			
-		}, []);
-   
-  console.log(players)
-  console.log(getPlayers())
+		fetch("http://localhost:8080/api/players", {
+			credentials: 'include'
+		}).then((response)=>response.json())
+		.then((data)=> {
+			console.log(data)
+			setPlayers(data)
+		})
+		.catch((err)=> {
+			console.log(err.message);
+		});
+	}, []);
 
 	return (
 		<div>
-			{players.map((player) => {
-				return (
-					<p key={player.id}>
-					  {player.firstName}
-					</p>
-				);
-			})}
+			
+			{players.map((player) => 
+				<p key={player.shirtNumber}>{player.firstName}</p>
+			)}
+	
 		</div>
 	);
 }

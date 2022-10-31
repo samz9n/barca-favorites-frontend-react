@@ -1,7 +1,6 @@
-import axios from "axios";
 
-const PLAYERS_API_URL = "http://localhost:8080/api/players"
+/* const PLAYERS_API_URL = "http://localhost:8080/api/players"
 
-export default function getPlayers() {
-    return axios.get(PLAYERS_API_URL);
-}
+export function getPlayers() {
+    return fetch(PLAYERS_API_URL);
+} */
