@@ -12,36 +12,32 @@ export default function Players() {
 		fetch('/api/players')
 			.then((response) => response.json())
 			.then((data) => {
-				setPlayers(data);
+				setPlayers(data.sort((a, b) => a.firstName.localeCompare(b.firstName)));
 			})
 			.catch((err) => {
 				console.log(err.message);
 			});
 	}, []);
-
-	function removePlayer(id) {
+	//REMOVE player
+	const removePlayer = (id) => {
 		fetch(`api/player/${id}`, {
 			method: 'DELETE',
 			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json',
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
 			}
 		}).then(() => {
-			let updatedPlayers = [...players].filter(i => i.playerId !== id);
+			let updatedPlayers = [ ...players ].filter((i) => i.playerId !== id);
 			setPlayers(updatedPlayers);
 		});
-	}
+	};
 	
-	/* const handleFavoriteToggle = (event) => {
-
-	} */
-
 	const addToFavorites = () => {
-		console.log('heart pressed')
-	}
+		console.log('heart pressed');
+	};
 
 	return (
-		<Box sx={{display:'flex', justifyContent: 'center'}}>
+		<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 			<Card
 				sx={{
 					minWidth: 400,
@@ -53,7 +49,7 @@ export default function Players() {
 					width: '100%'
 				}}
 			>
-				<List sx={{ width: '100%', overflow:'auto' }}>
+				<List sx={{ width: '100%', overflow: 'auto' }}>
 					{players.map((player) => (
 						<ListItem
 							key={player.playerId}
@@ -68,23 +64,43 @@ export default function Players() {
 							/>
 							<IconButton
 								onClick={addToFavorites}
-								sx={{ marginLeft: '2px', marginRight: '2px', color:'pink' }}
+								sx={{ marginLeft: '2px', marginRight: '2px', color: 'pink' }}
 								edge="end"
 								aria-label="addfavorite"
 							>
 								<FavoriteTwoTone />
 							</IconButton>
-							<IconButton sx={{ marginLeft: '2px', marginRight: '2px' }} edge="end" aria-label="edit">
+							{/* <Link to={'http://localhost:8080/player/edit/' + player.playerId}> */}
+							<IconButton
+								onClick={(e) => {
+									e.preventDefault();
+									window.location.href = 'http://localhost:8080/player/edit/' + player.playerId;
+								}}
+								sx={{ marginLeft: '2px', marginRight: '2px' }}
+								edge="end"
+								aria-label="edit"
+							>
 								<EditTwoToneIcon />
 							</IconButton>
-							<IconButton onClick={() => removePlayer(player.playerId)} sx={{ marginLeft: '2px', marginRight: '2px' }} edge="end" aria-label="delete">
+							{/* </Link> */}
+							<IconButton
+								onClick={() => removePlayer(player.playerId)}
+								sx={{ marginLeft: '2px', marginRight: '2px' }}
+								edge="end"
+								aria-label="delete"
+							>
 								<DeleteIcon />
 							</IconButton>
 						</ListItem>
 					))}
 				</List>
 			</Card>
-			<Button className='btnHover' sx={{backgroundColor:'rgb(170, 219, 170)', position:'absolute'}}>Add new player</Button>
+			<Button onClick={(e)=> {
+				e.preventDefault();
+				window.location.href = 'http://localhost:8080/player/add'
+			}} className="btnHover" sx={{ backgroundColor: 'rgb(170, 219, 170)', position: 'absolute' }}>
+				Add new player
+			</Button>
 		</Box>
 	);
 }
