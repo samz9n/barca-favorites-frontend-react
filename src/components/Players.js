@@ -4,10 +4,12 @@ import React, { useEffect, useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import FavoriteTwoTone from '@mui/icons-material/FavoriteTwoTone';
+import '../index.css';
 
-export default function Players() {
+export default function Players(props) {
 	const [ players, setPlayers ] = useState([]);
-
+	const [isDisabled, setIsDisabled] = useState([]);
+	//FETCH ALL PLAYERS FROM API
 	useEffect(() => {
 		fetch('/api/players')
 			.then((response) => response.json())
@@ -32,7 +34,7 @@ export default function Players() {
 		});
 	};
 	
-	const addToFavorites = () => {
+	const addToFavorites = (e) => {
 		console.log('heart pressed');
 	};
 
@@ -63,14 +65,26 @@ export default function Players() {
 								}
 							/>
 							<IconButton
-								onClick={addToFavorites}
+								className='disable-button'
+								key={player.playerId}
+								/* DISABLE BUTTON IF PLAYER.ID IS IN ISDISABLED-ARRAY */
+								disabled={isDisabled.indexOf(player.playerId)!==-1}
+								onClick={(e)=>{
+									console.log(player)
+									setIsDisabled([...isDisabled, player.playerId])
+									props.favorites.push(player)
+									
+									console.log(props.favorites)
+								}}
 								sx={{ marginLeft: '2px', marginRight: '2px', color: 'pink' }}
 								edge="end"
 								aria-label="addfavorite"
 							>
 								<FavoriteTwoTone />
 							</IconButton>
-							{/* <Link to={'http://localhost:8080/player/edit/' + player.playerId}> */}
+							{/* IF ADMIN IS LOGGED IN, SHOW THIS SECTION */}
+							{props.loggedInUser==='admin' &&
+							<div>
 							<IconButton
 								onClick={(e) => {
 									e.preventDefault();
@@ -82,7 +96,6 @@ export default function Players() {
 							>
 								<EditTwoToneIcon />
 							</IconButton>
-							{/* </Link> */}
 							<IconButton
 								onClick={() => removePlayer(player.playerId)}
 								sx={{ marginLeft: '2px', marginRight: '2px' }}
@@ -91,10 +104,13 @@ export default function Players() {
 							>
 								<DeleteIcon />
 							</IconButton>
+							</div>
+							}
 						</ListItem>
 					))}
 				</List>
 			</Card>
+			{/* ADD NEW PLAYER BUTTON */}
 			<Button onClick={(e)=> {
 				e.preventDefault();
 				window.location.href = 'http://localhost:8080/player/add'

@@ -16,3 +16,7 @@ html {
 .btnHover:hover {
   background-color: rgb(123, 233, 123) !important;
 }
+
+.disable-button:disabled {
+  color: rgb(155, 18, 18) !important;
+}
