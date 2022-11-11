@@ -68,7 +68,8 @@ function Navigation(props) {
       {/* LOGOUT BUTTON THAT TAKES YOU TO DEFAULT LOGIN PAGE */}
       <MenuItem onClick={(e)=>{
         e.preventDefault();
-        window.location.href = 'http://localhost:8080/login';
+		localStorage.clear();
+        window.location.href = 'http://localhost:8080/logout';
         
       } }>
         <ListItemIcon color='inherit'><ExitToAppIcon /></ListItemIcon>

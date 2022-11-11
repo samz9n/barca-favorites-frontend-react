@@ -41,6 +41,9 @@ export const Favorites = (props) => {
 										<Typography variant="h6">
 											{player.firstName} {player.lastName}
 										</Typography>
+										{/* SHOW IF PLAYER HAS NATIONALITY NAME */}
+										{player.nationality!==null && <Typography variant='h7'>{player.nationality.name}</Typography>}
+										{player.nationality===null && <Typography variant='h7'></Typography>}
 										<Typography>{player.position}</Typography>
 										<Typography>{'Age: ' + player.age}</Typography>
 										<Typography>{'Number: ' + player.shirtNumber}</Typography>
