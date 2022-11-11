@@ -5,6 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import FavoriteTwoTone from '@mui/icons-material/FavoriteTwoTone';
 import '../index.css';
+import { Link, Outlet } from 'react-router-dom';
 
 export default function Players(props) {
 	const [ players, setPlayers ] = useState([]);
@@ -34,21 +35,15 @@ export default function Players(props) {
 		});
 	};
 	
-	const addToFavorites = (e) => {
-		console.log('heart pressed');
-	};
-
 	return (
-		<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+		<Box sx={{ display: 'flex', flexDirection:'column', alignItems:'center' }}>
 			<Card
 				sx={{
-					minWidth: 400,
-					maxWidth: 500,
-					maxHeight: 800,
-					margin: '2rem',
-					display: 'flex',
-					flexDirection: 'row',
-					width: '100%'
+					width:'100%',
+					maxWidth: 600,
+					height:700,
+					marginTop:'2em',
+					display:'flex'
 				}}
 			>
 				<List sx={{ width: '100%', overflow: 'auto' }}>
@@ -64,16 +59,18 @@ export default function Players(props) {
 									</Typography>
 								}
 							/>
+							{/* ADD TO FAVORITES BUTTON (HEART) */}
 							<IconButton
 								className='disable-button'
 								key={player.playerId}
-								/* DISABLE BUTTON IF PLAYER.ID IS IN ISDISABLED-ARRAY */
-								disabled={isDisabled.indexOf(player.playerId)!==-1}
+								/* DISABLE BUTTON IF PLAYER IS IN LOCALSTORAGE */
+								disabled={localStorage.getItem('Player'+player.playerId)!==null}
 								onClick={(e)=>{
 									console.log(player)
 									setIsDisabled([...isDisabled, player.playerId])
 									props.favorites.push(player)
-									
+									/* ADD SELECTED PLAYER TO LOCALSTORAGE */
+									localStorage.setItem('Player'+player.playerId, JSON.stringify(player))
 									console.log(props.favorites)
 								}}
 								sx={{ marginLeft: '2px', marginRight: '2px', color: 'pink' }}
@@ -114,9 +111,13 @@ export default function Players(props) {
 			<Button onClick={(e)=> {
 				e.preventDefault();
 				window.location.href = 'http://localhost:8080/player/add'
-			}} className="btnHover" sx={{ backgroundColor: 'rgb(170, 219, 170)', position: 'absolute' }}>
+			}} className="btnHover" sx={{ backgroundColor: 'rgb(170, 219, 170)', position:'absolute' }}>
 				Add new player
 			</Button>
+			<Button variant='contained' component={Link} to='/favorites'>
+				Go to my favorites
+			</Button>
+			<Outlet></Outlet>
 		</Box>
 	);
 }
