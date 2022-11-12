@@ -79,7 +79,7 @@ function Navigation(props) {
 
 	return (
 		<Box>
-			<AppBar position="static">
+			<AppBar position="static" className='barca-color'>
 				<Toolbar>
 					<IconButton onClick={menuOpen} color="inherit">
 						<MenuIcon />

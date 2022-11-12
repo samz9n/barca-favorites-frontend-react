@@ -34,19 +34,21 @@ export const Favorites = (props) => {
 											flexDirection: 'column',
 											height: 250,
 											width: 200,
+											textAlign: 'center',
 											alignItems: 'center',
-											justifyContent: 'space-between'
+											justifyContent: 'space-between',
+											background: '#181733'
 										}}
 									>
-										<Typography variant="h6">
-											{player.firstName} {player.lastName}
+										<Typography variant="h6" color='#fdc52c'>
+											<strong>{player.firstName} {player.lastName}</strong>
 										</Typography>
 										{/* SHOW IF PLAYER HAS NATIONALITY NAME */}
-										{player.nationality!==null && <Typography variant='h7'>{player.nationality.name}</Typography>}
-										{player.nationality===null && <Typography variant='h7'></Typography>}
-										<Typography>{player.position}</Typography>
-										<Typography>{'Age: ' + player.age}</Typography>
-										<Typography>{'Number: ' + player.shirtNumber}</Typography>
+										{player.nationality!==null && <Typography color='white' variant='h7'>{player.nationality.name}</Typography>}
+										{player.nationality===null && <Typography color='white' variant='h7'></Typography>}
+										<Typography color='white'>{player.position}</Typography>
+										<Typography color='white'>{'Age: ' + player.age}</Typography>
+										<Typography color='white'>{'Number: ' + player.shirtNumber}</Typography>
 										<Button
 											sx={{ width: '100%' }}
 											variant="contained"

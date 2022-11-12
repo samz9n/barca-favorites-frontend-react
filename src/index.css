@@ -20,3 +20,6 @@ html {
 .disable-button:disabled {
   color: rgb(155, 18, 18) !important;
 }
+.barca-color {
+  background: linear-gradient(0deg,#181733 0,#181733 30%,rgba(173,16,40,.5)) !important;
+}
