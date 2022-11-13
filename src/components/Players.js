@@ -34,6 +34,12 @@ export default function Players(props) {
 			setPlayers(updatedPlayers);
 		});
 	};
+	//CLEAR FAVORITES
+	const clearFavorites = () => {
+		localStorage.clear();
+		setIsDisabled([]);
+		props.setFavorites([]);
+	}
 	
 	return (
 		<Box sx={{ display: 'flex', flexDirection:'column', alignItems:'center' }}>
@@ -116,6 +122,9 @@ export default function Players(props) {
 			</Button>
 			<Button variant='contained' component={Link} to='/favorites'>
 				Go to my favorites
+			</Button>
+			<Button sx={{marginTop:'10px'}} variant='contained' color='error' onClick={clearFavorites}>
+				Clear favorites
 			</Button>
 			<Outlet></Outlet>
 		</Box>
