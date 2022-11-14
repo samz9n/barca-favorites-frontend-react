@@ -11,7 +11,7 @@ function App() {
   const [onError, setOnError] = useState('Loading...')
 //FETCH SPRING SECURITYS LOGGED IN USER
   useEffect(() => {
-		fetch('https://barcafavorites.herokuapp.com/api/currentusername')
+		fetch('https://barcafavorites.herokuapp.com/api/currentusername', {credentials:'include'})
 			.then((response) => response.json())
 			.then((data) => {
         setLoggedInUser(data.name)

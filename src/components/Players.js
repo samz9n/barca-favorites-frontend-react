@@ -13,7 +13,7 @@ export default function Players(props) {
 	const [err, setErr] = useState('Loading...')
 	//FETCH ALL PLAYERS FROM API
 	useEffect(() => {
-		fetch('https://barcafavorites.herokuapp.com/api/players')
+		fetch('https://barcafavorites.herokuapp.com/api/players', {credentials:'include'})
 			.then((response) => response.json())
 			.then((data) => {
 				setPlayers(data.sort((a, b) => a.firstName.localeCompare(b.firstName)));
