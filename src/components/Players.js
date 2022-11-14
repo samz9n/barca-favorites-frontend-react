@@ -72,12 +72,10 @@ export default function Players(props) {
 								/* DISABLE BUTTON IF PLAYER IS IN LOCALSTORAGE */
 								disabled={localStorage.getItem('Player'+player.playerId)!==null}
 								onClick={(e)=>{
-									console.log(player)
 									setIsDisabled([...isDisabled, player.playerId])
 									props.favorites.push(player)
 									/* ADD SELECTED PLAYER TO LOCALSTORAGE */
 									localStorage.setItem('Player'+player.playerId, JSON.stringify(player))
-									console.log(props.favorites)
 								}}
 								sx={{ marginLeft: '2px', marginRight: '2px', color: 'pink' }}
 								edge="end"
