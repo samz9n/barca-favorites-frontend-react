@@ -89,7 +89,9 @@ export default function Players(props) {
 							<IconButton
 								onClick={(e) => {
 									e.preventDefault();
-									window.location.href = 'http://localhost:8080/player/edit/' + player.playerId;
+								/* 	LOCALHOST
+									window.location.href = 'http://localhost:8080/player/edit/' + player.playerId; */
+									window.location.href = 'https://barcafavorites.herokuapp.com/player/edit/' + player.playerId;
 								}}
 								sx={{ marginLeft: '2px', marginRight: '2px' }}
 								edge="end"
@@ -114,7 +116,9 @@ export default function Players(props) {
 			{/* ADD NEW PLAYER BUTTON */}
 			<Button onClick={(e)=> {
 				e.preventDefault();
-				window.location.href = 'http://localhost:8080/player/add'
+				/* LOCALHOST
+				window.location.href = 'http://localhost:8080/player/add' */
+				window.location.href = 'https://barcafavorites.herokuapp.com/player/add'
 			}} className="btnHover" sx={{ backgroundColor: 'rgb(170, 219, 170)', position:'absolute' }}>
 				Add new player
 			</Button>

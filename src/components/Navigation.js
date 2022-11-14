@@ -69,7 +69,9 @@ function Navigation(props) {
       <MenuItem onClick={(e)=>{
         e.preventDefault();
 		localStorage.clear();
-        window.location.href = 'http://localhost:8080/logout';
+		/* LOCALHOST
+        window.location.href = 'http://localhost:8080/logout'; */
+		window.location.href = 'https://barcafavorites.herokuapp.com/logout'
         
       } }>
         <ListItemIcon color='inherit'><ExitToAppIcon /></ListItemIcon>

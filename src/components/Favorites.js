@@ -1,7 +1,6 @@
-import { Card, CardContent, Box, Grid, Paper, Button, Typography } from '@mui/material';
+import { Box, Grid, Paper, Button, Typography } from '@mui/material';
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import Players from './Players';
 
 export const Favorites = (props) => {
 	//REMOVES SELECTED PLAYER FROM FAVORITES
