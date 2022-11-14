@@ -8,15 +8,17 @@ import './index.css';
 function App() {
   const [favorites, setFavorites] = useState([]);
   const [ loggedInUser, setLoggedInUser ] = useState('');
+  const [onError, setOnError] = useState('Loading...')
 //FETCH SPRING SECURITYS LOGGED IN USER
   useEffect(() => {
 		fetch('https://barcafavorites.herokuapp.com/api/currentusername')
 			.then((response) => response.json())
 			.then((data) => {
         setLoggedInUser(data.name)
+        setOnError('');
 			})
 			.catch((err) => {
-				console.log(err.message);
+				setOnError('Failed to fetch data!')
 			});
 	}, []);
 

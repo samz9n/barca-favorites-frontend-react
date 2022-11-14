@@ -10,15 +10,17 @@ import { Link, Outlet } from 'react-router-dom';
 export default function Players(props) {
 	const [ players, setPlayers ] = useState([]);
 	const [isDisabled, setIsDisabled] = useState([]);
+	const [err, setErr] = useState('Loading...')
 	//FETCH ALL PLAYERS FROM API
 	useEffect(() => {
 		fetch('https://barcafavorites.herokuapp.com/api/players')
 			.then((response) => response.json())
 			.then((data) => {
 				setPlayers(data.sort((a, b) => a.firstName.localeCompare(b.firstName)));
+				setErr('');
 			})
 			.catch((err) => {
-				console.log(err.message);
+				setErr("Failed to fetch data!")
 			});
 	}, []);
 	//REMOVE player
