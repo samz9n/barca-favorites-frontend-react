@@ -10,7 +10,7 @@ function App() {
   const [ loggedInUser, setLoggedInUser ] = useState('');
 //FETCH SPRING SECURITYS LOGGED IN USER
   useEffect(() => {
-		fetch('/api/currentusername')
+		fetch('https://barcafavorites.herokuapp.com/api/currentusername')
 			.then((response) => response.json())
 			.then((data) => {
         setLoggedInUser(data.name)

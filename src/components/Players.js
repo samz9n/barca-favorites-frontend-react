@@ -12,7 +12,7 @@ export default function Players(props) {
 	const [isDisabled, setIsDisabled] = useState([]);
 	//FETCH ALL PLAYERS FROM API
 	useEffect(() => {
-		fetch('/api/players')
+		fetch('https://barcafavorites.herokuapp.com/api/players')
 			.then((response) => response.json())
 			.then((data) => {
 				setPlayers(data.sort((a, b) => a.firstName.localeCompare(b.firstName)));
@@ -23,7 +23,7 @@ export default function Players(props) {
 	}, []);
 	//REMOVE player
 	const removePlayer = (id) => {
-		fetch(`api/player/${id}`, {
+		fetch(`https://barcafavorites.herokuapp.com/api/player/${id}`, {
 			method: 'DELETE',
 			headers: {
 				Accept: 'application/json',
