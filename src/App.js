@@ -25,7 +25,7 @@ function App() {
   return (
     <BrowserRouter>
         <Routes>
-          <Route path='/' element={ <Navigation loggedInUser = {loggedInUser} /> }>
+          <Route path='/' element={ <Navigation loggedInUser = {loggedInUser} setLoggedInUser={setLoggedInUser} /> }>
             <Route path='players' element={ <Players loggedInUser = {loggedInUser} favorites={favorites} setFavorites={setFavorites} /> } />
             <Route path='favorites' element={ <Favorites favorites={favorites} setFavorites={setFavorites} /> } />
           </Route>
