@@ -27,10 +27,6 @@ export default function Players(props) {
 	const removePlayer = (id) => {
 		fetch(`https://barcafavorites.herokuapp.com/api/player/${id}`, {
 			method: 'DELETE',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			}
 		}).then(() => {
 			let updatedPlayers = [ ...players ].filter((i) => i.playerId !== id);
 			setPlayers(updatedPlayers);
